@@ -1062,6 +1062,12 @@ def generate_build_tree(
             # See logic around setting CL_MPCount below
             cmake_args += ["-DCMAKE_VS_GLOBALS=UseMultiToolTask=true;EnforceProcessCountAcrossBuilds=true"]
 
+    # handle MLX EP
+    if args.use_mlx:
+        cmake_args += ["-Donnxruntime_USE_MLX=ON"]
+    else:
+        cmake_args += ["-Donnxruntime_USE_MLX=OFF"]
+
     cmake_args += [f"-D{define}" for define in cmake_extra_defines]
 
     cmake_args += cmake_extra_args

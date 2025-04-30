@@ -196,6 +196,9 @@ option(onnxruntime_ENABLE_WEBASSEMBLY_OUTPUT_OPTIMIZED_MODEL "Enable this option
 option(onnxruntime_ENABLE_WEBASSEMBLY_MEMORY64 "Enable this option to allow WebAssembly to use 64bit memory" OFF)
 option(onnxruntime_ENABLE_WEBASSEMBLY_RELAXED_SIMD "Enable WebAssembly Relaxed SIMD" OFF)
 
+# Enable MLX execution provider (Apple Silicon only)
+option(onnxruntime_USE_MLX "Build with MLX support" OFF)
+
 # Enable bitcode for iOS
 option(onnxruntime_ENABLE_BITCODE "Enable bitcode for iOS only" OFF)
 
@@ -1055,6 +1058,10 @@ endif()
 if (onnxruntime_USE_COREML)
     list(APPEND ORT_PROVIDER_FLAGS  -DUSE_COREML=1)
     list(APPEND ONNXRUNTIME_PROVIDER_NAMES coreml)
+endif()
+if (onnxruntime_USE_MLX)
+    list(APPEND ORT_PROVIDER_FLAGS -DUSE_MLX=1)
+    list(APPEND ONNXRUNTIME_PROVIDER_NAMES mlx)
 endif()
 if (onnxruntime_USE_XNNPACK)
   list(APPEND ORT_PROVIDER_FLAGS -DUSE_XNNPACK=1)

@@ -150,6 +150,10 @@ if (onnxruntime_USE_COREML)
   include(onnxruntime_providers_coreml.cmake)
 endif()
 
+if(onnxruntime_USE_MLX)
+  include(onnxruntime_providers_mlx.cmake)
+endif()
+
 if (onnxruntime_USE_WEBNN)
   include(onnxruntime_providers_webnn.cmake)
 endif()
